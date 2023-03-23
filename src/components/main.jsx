@@ -1,5 +1,5 @@
 import React from 'react';
-import HolySite from "/Holy_Site.webp"
+import HolySite from "/public/Holy_Site.webp"
 import Campus from "/public/Campus.webp"
 import Preserve from "/public/Preserve.webp"
 import GovernmentPlaza from "/public/Government_Plaza.webp"
@@ -9,6 +9,18 @@ import Harbor from "/public/Harbor.webp"
 import DiplomaticQuarter from "/public/Diplomatic_Quarter.webp"
 import IndustrialZone from "/public/Industrial_Zone.webp"
 import Aerodrome from "/public/Aerodrome.webp"
+
+import UnresearchedHolySite from "/public/unresearchedHoly_Site.webp"
+import UnresearchedCampus from "/public/unresearchedCampus.webp"
+import UnresearchedPreserve from "/public/unresearchedPreserve.webp"
+import UnresearchedGovernmentPlaza from "/public/unresearchedGovernment_Plaza.webp"
+import UnresearchedEncampment from "/public/unresearchedEncampment.webp"
+import UnresearchedCommercialHub from "/public/unresearchedCommercial_Hub.webp"
+import UnresearchedHarbor from "/public/unresearchedHarbor.webp"
+import UnresearchedDiplomaticQuarter from "/public/unresearchedDiplomatic_Quarter.webp"
+import UnresearchedIndustrialZone from "/public/unresearchedIndustrial_Zone.webp"
+import UnresearchedAerodrome from "/public/unresearchedAerodrome.webp"
+
 import styled from "styled-components";
 
 const DistrictImage = styled.img`
@@ -30,15 +42,15 @@ const Main = () => {
     <div>
       <ResearchedDistricts>
         <div>Изученные районы</div>
-        <DistrictImage src={HolySite}/>
+        <DistrictImage src={UnresearchedHolySite}/>
         <DistrictImage src={Preserve}/>
         <DistrictImage src={GovernmentPlaza}/>
         <DistrictImage src={Campus}/>
         <DistrictImage src={Encampment}/>
-        <DistrictImage src={CommercialHub}/>
+        <DistrictImage src={UnresearchedCommercialHub}/>
         <DistrictImage src={Harbor}/>
         <DistrictImage src={DiplomaticQuarter}/>
-        <DistrictImage src={IndustrialZone}/>
+        <DistrictImage src={UnresearchedIndustrialZone}/>
         <DistrictImage src={Aerodrome}/>
       </ResearchedDistricts>
     </div>
