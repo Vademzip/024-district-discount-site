@@ -1,30 +1,37 @@
-import React from 'react';
+import React, {useState} from 'react';
 import HolySite from "/public/Holy_Site.webp"
-import Campus from "/public/Campus.webp"
-import Preserve from "/public/Preserve.webp"
-import GovernmentPlaza from "/public/Government_Plaza.webp"
-import Encampment from "/public/Encampment.webp"
-import CommercialHub from "/public/Commercial_Hub.webp"
-import Harbor from "/public/Harbor.webp"
-import DiplomaticQuarter from "/public/Diplomatic_Quarter.webp"
-import IndustrialZone from "/public/Industrial_Zone.webp"
-import Aerodrome from "/public/Aerodrome.webp"
-
 import UnresearchedHolySite from "/public/unresearchedHoly_Site.webp"
-import UnresearchedCampus from "/public/unresearchedCampus.webp"
-import UnresearchedPreserve from "/public/unresearchedPreserve.webp"
-import UnresearchedGovernmentPlaza from "/public/unresearchedGovernment_Plaza.webp"
-import UnresearchedEncampment from "/public/unresearchedEncampment.webp"
-import UnresearchedCommercialHub from "/public/unresearchedCommercial_Hub.webp"
-import UnresearchedHarbor from "/public/unresearchedHarbor.webp"
-import UnresearchedDiplomaticQuarter from "/public/unresearchedDiplomatic_Quarter.webp"
-import UnresearchedIndustrialZone from "/public/unresearchedIndustrial_Zone.webp"
-import UnresearchedAerodrome from "/public/unresearchedAerodrome.webp"
-
 import styled from "styled-components";
+import ResearchedDistrictsItem from "../features/ResearchedDistricts/ResearchedDistricts.jsx";
+import NewDistrict from "../features/NewDistrict/NewDistrict.jsx";
+import {useSelector} from "react-redux";
+import {selectAllDistricts} from "../features/NewDistrict/newDistrictSlice.js";
+import MyDistrict from "../features/MyDistrict/MyDistrict.jsx";
+
+const GridContainer = styled.div`
+  display: flex;
+`
+
+export const DistrictsName = {
+    HolySite: 'HolySite',
+    Campus: 'Campus',
+    Preserve: 'Preserve',
+    GovernmentPlaza: 'GovernmentPlaza',
+    Encampment: 'Encampment',
+    CommercialHub: 'CommercialHub',
+    Harbor: 'Harbor',
+    DiplomaticQuarter: 'DiplomaticQuarter',
+    IndustrialZone: 'IndustrialZone',
+    Aerodrome: 'Aerodrome'
+}
 
 const DistrictImage = styled.img`
   max-width: 64px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
 `
 
 const ResearchedDistricts = styled.div`
@@ -36,25 +43,84 @@ const ResearchedDistricts = styled.div`
   border-radius: 10px;
 `
 
+const SetDistrict = styled.div`
+  text-align: center;
+  font-size: 24px;
+  width: 324px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+`
+const MyDistrictsList = styled.div`
+  text-align: center;
+  font-size: 24px;
+  width: 324px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`
+
 
 const Main = () => {
-  return (
-    <div>
-      <ResearchedDistricts>
-        <div>Изученные районы</div>
-        <DistrictImage src={UnresearchedHolySite}/>
-        <DistrictImage src={Preserve}/>
-        <DistrictImage src={GovernmentPlaza}/>
-        <DistrictImage src={Campus}/>
-        <DistrictImage src={Encampment}/>
-        <DistrictImage src={UnresearchedCommercialHub}/>
-        <DistrictImage src={Harbor}/>
-        <DistrictImage src={DiplomaticQuarter}/>
-        <DistrictImage src={UnresearchedIndustrialZone}/>
-        <DistrictImage src={Aerodrome}/>
-      </ResearchedDistricts>
-    </div>
-  );
+
+    const AllDistricts = useSelector(selectAllDistricts)
+    for (const builtDistrictName in AllDistricts.builtDistrict.districts) {
+        const builtDistrictCount = AllDistricts.builtDistrict.districts[builtDistrictName];
+    }
+    const builtDistricts = Object.entries(AllDistricts.builtDistrict.districts).map(([districtName, districtCount]) => (
+        <div key={districtName}>
+            <MyDistrict districtName={districtName} districtCount={districtCount} />
+        </div>
+    ));
+    const layDistricts = Object.entries(AllDistricts.layDistrict.districts).map(([districtName, districtCount]) => (
+        <div key={districtName}>
+            <MyDistrict districtName={districtName} districtCount={districtCount} />
+        </div>
+    ));
+
+    return (
+        <GridContainer>
+            <div>
+            <ResearchedDistricts>
+                <div>Изученные районы</div>
+                <ResearchedDistrictsItem districtName={DistrictsName.HolySite}/>
+                <ResearchedDistrictsItem districtName={DistrictsName.Campus}/>
+                <ResearchedDistrictsItem districtName={DistrictsName.Preserve}/>
+                <ResearchedDistrictsItem districtName={DistrictsName.Encampment}/>
+                <ResearchedDistrictsItem districtName={DistrictsName.CommercialHub}/>
+                <ResearchedDistrictsItem districtName={DistrictsName.Harbor}/>
+                <ResearchedDistrictsItem districtName={DistrictsName.GovernmentPlaza}/>
+                <ResearchedDistrictsItem districtName={DistrictsName.DiplomaticQuarter}/>
+                <ResearchedDistrictsItem districtName={DistrictsName.IndustrialZone}/>
+                <ResearchedDistrictsItem districtName={DistrictsName.Aerodrome}/>
+            </ResearchedDistricts>
+            <SetDistrict>
+                <div>Добавить новый район</div>
+                <NewDistrict districtName={DistrictsName.HolySite}/>
+                <NewDistrict districtName={DistrictsName.Campus}/>
+                <NewDistrict districtName={DistrictsName.Preserve}/>
+                <NewDistrict districtName={DistrictsName.Encampment}/>
+                <NewDistrict districtName={DistrictsName.CommercialHub}/>
+                <NewDistrict districtName={DistrictsName.Harbor}/>
+                <NewDistrict districtName={DistrictsName.GovernmentPlaza}/>
+                <NewDistrict districtName={DistrictsName.DiplomaticQuarter}/>
+                <NewDistrict districtName={DistrictsName.Aerodrome}/>
+                <NewDistrict districtName={DistrictsName.IndustrialZone}/>
+            </SetDistrict>
+            </div>
+            <MyDistrictsList>
+                <div>Построенные районы</div>
+                {builtDistricts}
+            </MyDistrictsList>
+            <MyDistrictsList>
+                <div>Заложенные районы</div>
+                {layDistricts}
+            </MyDistrictsList>
+        </GridContainer>
+    );
 };
 
 export default Main;
