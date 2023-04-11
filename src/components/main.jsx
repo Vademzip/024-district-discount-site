@@ -20,6 +20,7 @@ export const DistrictsName = {
   Campus: 'Campus',
   Preserve: 'Preserve',
   GovernmentPlaza: 'GovernmentPlaza',
+  EntertainmentComplex : 'EntertainmentComplex',
   TheaterSquare: 'TheaterSquare',
   Encampment: 'Encampment',
   CommercialHub: 'CommercialHub',
@@ -136,6 +137,7 @@ const Main = () => {
             <ResearchedDistrictsItem districtName={DistrictsName.Preserve}/>
             <ResearchedDistrictsItem districtName={DistrictsName.Encampment}/>
             <ResearchedDistrictsItem districtName={DistrictsName.CommercialHub}/>
+            <ResearchedDistrictsItem districtName={DistrictsName.EntertainmentComplex}/>
             <ResearchedDistrictsItem districtName={DistrictsName.TheaterSquare}/>
             <ResearchedDistrictsItem districtName={DistrictsName.Harbor}/>
             <ResearchedDistrictsItem districtName={DistrictsName.GovernmentPlaza}/>
@@ -151,6 +153,7 @@ const Main = () => {
             <NewDistrict districtName={DistrictsName.Preserve}/>
             <NewDistrict districtName={DistrictsName.Encampment}/>
             <NewDistrict districtName={DistrictsName.CommercialHub}/>
+            <NewDistrict districtName={DistrictsName.EntertainmentComplex}/>
             <NewDistrict districtName={DistrictsName.TheaterSquare}/>
             <NewDistrict districtName={DistrictsName.Harbor}/>
             <NewDistrict districtName={DistrictsName.GovernmentPlaza}/>
