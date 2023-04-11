@@ -1,9 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
-import {changeDistrictResearch, selectResearchedDistricts} from "../ResearchedDistricts/researchedDistricts-slice.js";
+import {selectResearchedDistricts} from "../ResearchedDistricts/researchedDistricts-slice.js";
 import {districtImages} from "../ResearchedDistricts/ResearchedDistricts.jsx";
 import {addBuiltDistrict, addLayDistrict, selectNewDistrictMenuState, toggleMenu} from "./newDistrictSlice.js";
+import layIcon from "/public/brickwall.png"
+import buildIcon from "/public/checked.png"
+
 
 const DistrictImage = styled.img`
   max-width: 64px;
@@ -13,27 +16,10 @@ const DistrictImage = styled.img`
   }
 `
 
-const NewDistrictMenu = styled.div`
-  display: flex;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  border: 1px solid black;
 
-  & div {
-    padding: 10px;
-    outline: 1px solid black;
-  }
-
-  & div:hover {
-    cursor: pointer;
-  }
-
-`
 const NewDistrict = ({districtName}) => {
-    console.log(districtName)
+
+    const district = districtName
     const ResearchedDistrictsState = useSelector(selectResearchedDistricts)
     const showModal = useSelector(selectNewDistrictMenuState)
     const dispatch = useDispatch()
@@ -45,31 +31,30 @@ const NewDistrict = ({districtName}) => {
         dispatch(toggleMenu())
     };
 
-    const addBuiltDistricts = (districtName) => {
-        return () => {
-            dispatch(addBuiltDistrict(districtName))
-        }
+    const addBuiltDistricts = (district) => {
+            ResearchedDistrictsState[isResearched] && dispatch(addBuiltDistrict(district))
     }
 
-    const addLayDistricts = (districtName) => {
-        return () => {
-            dispatch(addLayDistrict(districtName))
-        }
+    const addLayDistricts = (district) => {
+          ResearchedDistrictsState[isResearched] && dispatch(addLayDistrict(district))
     }
 
 
 
     return (
-        <>
-            <DistrictImage src={imagePath} alt={imageName} onClick={() => {
-                handleMenuOpen()
+      <div>
+          <DistrictImage src={imagePath} alt={imageName} onClick={() => {
+              handleMenuOpen()
+          }
+          }/>
+            <img className={'actionIcons'} src={layIcon}  onClick={() => {
+              addLayDistricts(districtName)
+            }}/>
+            <img className={'actionIcons'} src={buildIcon} onClick={() => {
+              addBuiltDistricts(districtName)
             }
             }/>
-            {showModal && <NewDistrictMenu>
-                <div onClick={addLayDistricts(districtName)}>Заложить</div>
-                <div onClick={addBuiltDistricts(districtName)}>Достроить</div>
-            </NewDistrictMenu>}
-        </>
+      </div>
     );
 };
 

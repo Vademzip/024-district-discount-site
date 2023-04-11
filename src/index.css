@@ -3,3 +3,21 @@
 *{
     font-family: 'Montserrat', sans-serif;
 }
+
+.actionIcons{
+    width: 56px;
+    cursor: pointer;
+}
+
+.bigCock{
+    max-height: 250px;
+    text-align: center;
+    font-size: 24px;
+    width: 324px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

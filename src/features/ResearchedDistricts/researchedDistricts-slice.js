@@ -6,11 +6,13 @@ const initialState = {
         isCampusResearched : false,
         isPreserveResearched : false,
         isEncampmentResearched : false,
+        isTheaterSquareResearched: false,
         isGovernmentPlazaResearched : false,
         isHarborResearched : false,
         isCommercialHubResearched : false,
         isDiplomaticQuarterResearched : false,
         isIndustrialZoneResearched : false,
+        isWaterParkResearched: false,
         isAerodromeResearched : false,
     },
     count : 0
@@ -39,3 +41,4 @@ export const researchedDistrictsReducer = researchedDistrictsSlice.reducer
 export const {changeDistrictResearch} = researchedDistrictsSlice.actions
 
 export const selectResearchedDistricts = (state) => state.researchedDistricts.districts
+export const selectCountOfResearchedDistricts = (state) => state.researchedDistricts.count

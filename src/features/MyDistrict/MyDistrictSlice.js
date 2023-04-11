@@ -53,5 +53,6 @@ const MyDistrictSlice = createSlice({
 export const NewDistrictReducer = MyDistrictSlice.reducer
 
 export const {addBuiltDistrict, addLayDistrict} = MyDistrictSlice.actions
-
+// export const selectBuiltDistrictCount = (state) => state.researchedDistricts.builtDistrict.count
+// export const selectLayDistrictCount = (state) => state.researchedDistricts.layDistrict.count
 // export const selectResearchedDistricts = (state) => state.researchedDistricts.districts

@@ -25,27 +25,28 @@ const NewDistrictMenuComponent = styled.div`
 `
 
 
-const NewDistrictMenu = ({districtName}) => {
-    const dispatch = useDispatch()
-
-    const addBuiltDistricts = (districtName) => {
-        dispatch(addBuiltDistrict(districtName))
-    }
-
-    const addLayDistricts = (districtName) => {
-        dispatch(addLayDistrict(districtName))
-    }
+const NewDistrictMenu = (props) => {
+    // const dispatch = useDispatch()
+    //
+    // const addBuiltDistricts = (districtName) => {
+    //     dispatch(addBuiltDistrict(districtName))
+    // }
+    //
+    // const addLayDistricts = (districtName) => {
+    //     dispatch(addLayDistrict(districtName))
+    // }
 
     return (
         <div>
-            <NewDistrictMenuComponent>
-                <div onClick={() => {
-                    addLayDistricts(districtName)
-                }}>Заложить</div>
-                <div onClick={() => {
-                    addBuiltDistricts(districtName)
-                }}>Достроить</div>
-            </NewDistrictMenuComponent>
+            {/*<NewDistrictMenuComponent>*/}
+            {/*    <div onClick={() => {*/}
+            {/*        addLayDistricts(districtName)*/}
+            {/*    }}>Заложить</div>*/}
+            {/*    <div onClick={() => {*/}
+            {/*        addBuiltDistricts(districtName)*/}
+            {/*    }}>Достроить</div>*/}
+            {/*</NewDistrictMenuComponent>*/}
+            {props.districtName}
         </div>
     );
 };
