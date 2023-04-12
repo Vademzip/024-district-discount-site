@@ -6,6 +6,7 @@ const initialState = {
         isCampusResearched : false,
         isPreserveResearched : false,
         isEncampmentResearched : false,
+        isEntertainmentComplexResearched : false,
         isTheaterSquareResearched: false,
         isGovernmentPlazaResearched : false,
         isHarborResearched : false,
@@ -32,13 +33,14 @@ const researchedDistrictsSlice = createSlice({
                 state.districts[districtName] = true
                 state.count++
             }
-        }
+        },
+        resetResearchedState: () => initialState
     }
 })
 
 export const researchedDistrictsReducer = researchedDistrictsSlice.reducer
 
-export const {changeDistrictResearch} = researchedDistrictsSlice.actions
+export const {changeDistrictResearch, resetResearchedState} = researchedDistrictsSlice.actions
 
 export const selectResearchedDistricts = (state) => state.researchedDistricts.districts
 export const selectCountOfResearchedDistricts = (state) => state.researchedDistricts.count
