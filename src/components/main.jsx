@@ -19,6 +19,9 @@ const GridContainer = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   row-gap: 20px;
+  @media (max-width: 700px) {
+    justify-content: center;
+  }
 `
 
 export const DistrictsName = {
@@ -54,6 +57,10 @@ const ResearchedDistricts = styled.div`
   padding: 10px;
   border: 1px solid black;
   border-radius: 10px;
+  @media(max-width: 900px){
+    width: auto;
+    height: auto;
+  }
 `
 
 const SetDistrict = styled.div`
@@ -63,7 +70,21 @@ const SetDistrict = styled.div`
   padding: 10px;
   border: 1px solid black;
   border-radius: 10px;
+  @media (max-width: 700px) {
+    flex-direction: column;
+    align-content: center;
+    width: auto;
+  }
 `
+const SetDistrictsBlock = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  @media (max-width: 900px) {
+    justify-content: center
+  }
+`
+
 const MyDistrictsList = styled.div`
   height: 300px;
   text-align: center;
@@ -75,6 +96,10 @@ const MyDistrictsList = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  @media(max-width: 900px){
+    width: auto;
+    height: auto;
+  }
 `
 
 const StyledButton = styled.button`
@@ -208,7 +233,7 @@ const Main = () => {
         <div>
           <SetDistrict>
             <div style={{alignSelf: 'center', height: '100%'}}>Добавить новый район</div>
-            <div style={{display:'flex', flexWrap:'wrap', gap:'20px'}}>
+            <SetDistrictsBlock>
               <NewDistrict districtName={DistrictsName.HolySite}/>
               <NewDistrict districtName={DistrictsName.Campus}/>
               <NewDistrict districtName={DistrictsName.Preserve}/>
@@ -222,7 +247,7 @@ const Main = () => {
               <NewDistrict districtName={DistrictsName.IndustrialZone}/>
               <NewDistrict districtName={DistrictsName.WaterPark}/>
               <NewDistrict districtName={DistrictsName.Aerodrome}/>
-            </div>
+            </SetDistrictsBlock>
           </SetDistrict>
         </div>
         <StyledButton onClick={() => {
