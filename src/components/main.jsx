@@ -13,6 +13,7 @@ import {
 } from "../features/ResearchedDistricts/researchedDistricts-slice.js";
 import {toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import {setDropCategory} from "../features/AddingDistricts/addingDistrictSlice.js";
 
 const GridContainer = styled.div`
   display: flex;
@@ -215,11 +216,15 @@ const Main = () => {
             <ResearchedDistrictsItem districtName={DistrictsName.Aerodrome}/>
           </ResearchedDistricts>
         </div>
-        <MyDistrictsList>
+        <MyDistrictsList
+          onDragLeave={() => dispatch(setDropCategory('lay'))}
+        >
           <div>Заложенные районы</div>
           {layDistricts}
         </MyDistrictsList>
-        <MyDistrictsList>
+        <MyDistrictsList
+          onDragLeave={() => dispatch(setDropCategory('built'))}
+        >
           <div>Построенные районы</div>
           {builtDistricts}
         </MyDistrictsList>

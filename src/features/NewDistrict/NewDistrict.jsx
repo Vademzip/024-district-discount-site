@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {selectResearchedDistricts} from "../ResearchedDistricts/researchedDistricts-slice.js";
@@ -11,9 +11,8 @@ import {
   selectNewDistrictMenuState,
   toggleMenu
 } from "./newDistrictSlice.js";
-import layIcon from "/public/brickwall.png"
-import buildIcon from "/public/checked.png"
 import {toast} from "react-toastify";
+import {setDraggableDistrict, setDropCategory} from "../AddingDistricts/addingDistrictSlice.js";
 
 
 const DistrictImage = styled.img`
@@ -42,7 +41,6 @@ const NewDistrict = ({districtName}) => {
   const handleMenuOpen = () => {
     dispatch(toggleMenu())
   };
-
   const addBuiltDistricts = (district) => {
     if (district === 'GovernmentPlaza') {
       if (govPlazaCount > 0){
@@ -84,7 +82,6 @@ const NewDistrict = ({districtName}) => {
         theme: "light",
       });
   }
-
   const addLayDistricts = (district) => {
     if (district === 'GovernmentPlaza') {
       if (govPlazaCount > 0){
@@ -126,21 +123,35 @@ const NewDistrict = ({districtName}) => {
         theme: "light",
       });
   }
+  function addDraggableDistrict(event, district) {
+    dispatch(setDraggableDistrict(district))
+  }
 
+
+  function dropDistrictImage(event) {
+    console.log('произошел drop')
+  }
 
   return (
     <div>
       <DistrictImage src={imagePath} alt={imageName} onClick={() => {
         handleMenuOpen()
       }
-      }/>
-      <img className={'actionIcons'} src={layIcon} onClick={() => {
+      }
+                     draggable={true}
+        // onDragOver={}
+        // onDragLeave={}
+                     onDragStart={(event) => addDraggableDistrict(event, district)}
+        // onDragEnd={}
+                     onDragEnd={(event) => dropDistrictImage(event)}
+      />
+      {/*<img className={'actionIcons'} src={layIcon} onClick={() => {
         addLayDistricts(districtName)
       }}/>
       <img className={'actionIcons'} src={buildIcon} onClick={() => {
         addBuiltDistricts(districtName)
       }
-      }/>
+      }/>*/}
     </div>
   );
 };
