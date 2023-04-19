@@ -120,13 +120,50 @@ const Main = () => {
   for (const builtDistrictName in AllDistricts.builtDistrict.districts) {
     const builtDistrictCount = AllDistricts.builtDistrict.districts[builtDistrictName];
   }
+
+  function dragOverHandler(event) {
+    event.preventDefault()
+    if (event.target.className === 'builtDistrict' || event.target.className === 'layDistrict'){
+      console.log('Навелся на элемент!')
+      event.target.style.background = 'red'
+    }
+  }
+
+  function dragLeaveHandler(event) {
+    event.target.style.background = 'none'
+  }
+
+  function dragStartHandler(event) {
+
+  }
+
+  function dragEndHandler(event) {
+    event.target.style.background = 'none'
+  }
+
+  function dropHandler(event) {
+    event.preventDefault()
+  }
+
   const builtDistricts = Object.entries(AllDistricts.builtDistrict.districts).map(([districtName, districtCount]) => (
-    <div key={districtName}>
+    <div draggable={true}
+         onDragOver={(event) => dragOverHandler(event)}
+         onDragLeave={(event) => dragLeaveHandler(event) }
+         onDragStart={(event) => dragStartHandler(event)}
+         onDragEnd={(event) => dragEndHandler(event) }
+         onDrop={(event) => dropHandler(event) }
+         key={districtName}>
       <MyDistrict districtName={districtName} districtCount={districtCount}/>
     </div>
   ));
   const layDistricts = Object.entries(AllDistricts.layDistrict.districts).map(([districtName, districtCount]) => (
-    <div key={districtName}>
+    <div draggable={true}
+         onDragOver={(event) => dragOverHandler(event)}
+         onDragLeave={(event) => dragLeaveHandler(event) }
+         onDragStart={(event) => dragStartHandler(event)}
+         onDragEnd={(event) => dragEndHandler(event) }
+         onDrop={(event) => dropHandler(event) }
+         key={districtName}>
       <MyDistrict districtName={districtName} districtCount={districtCount}/>
     </div>
   ));
@@ -215,14 +252,16 @@ const Main = () => {
             <ResearchedDistrictsItem districtName={DistrictsName.Aerodrome}/>
           </ResearchedDistricts>
         </div>
-        <MyDistrictsList>
-          <div>Заложенные районы</div>
-          {layDistricts}
-        </MyDistrictsList>
-        <MyDistrictsList>
-          <div>Построенные районы</div>
-          {builtDistricts}
-        </MyDistrictsList>
+        <div className={'myDistrict'}>
+          <MyDistrictsList className={'layDistrict'}>
+            <div>Заложенные районы</div>
+            {layDistricts}
+          </MyDistrictsList>
+          <MyDistrictsList className={'builtDistrict'}>
+            <div>Построенные районы</div>
+            {builtDistricts}
+          </MyDistrictsList>
+        </div>
         <MyDistrictsList>
           <div>Скидочные райончики</div>
           {discountDistrictArray.map((item, index) => <div>

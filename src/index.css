@@ -21,3 +21,9 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+
+.myDistrict{
+    column-gap: 30px;
+    display: flex;
+    justify-content: space-between;
+}

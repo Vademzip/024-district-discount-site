@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {selectResearchedDistricts} from "../ResearchedDistricts/researchedDistricts-slice.js";
@@ -24,9 +24,11 @@ const DistrictImage = styled.img`
   }
 `
 
-
-
-
+const AddNewDistrict = styled.div`
+  position: absolute;
+  display: ${props => props.open ? 'block' : 'none'};
+  transform: translateX(-25%);
+`
 const NewDistrict = ({districtName}) => {
 
   const district = districtName
@@ -34,11 +36,12 @@ const NewDistrict = ({districtName}) => {
   const dipQuarterCount = useSelector(selectDiplomaticQuarterCount)
   const ResearchedDistrictsState = useSelector(selectResearchedDistricts)
   const showModal = useSelector(selectNewDistrictMenuState)
+  const menuRef = useRef(null)
   const dispatch = useDispatch()
   const isResearched = `is${districtName}Researched`
   const imageName = ResearchedDistrictsState[isResearched] ? districtName : `Unresearched${districtName}`;
   const imagePath = districtImages[imageName];
-
+  const [openMenu, setOpenMenu] = useState(false)
   const handleMenuOpen = () => {
     dispatch(toggleMenu())
   };
@@ -127,22 +130,49 @@ const NewDistrict = ({districtName}) => {
       });
   }
 
+  const useOnClickOutside = (ref, handler) => {
+    useEffect(() => {
+      const listener = event => {
+        if (!ref.current || ref.current.contains(event.target)) {
+          return;
+        }
+        handler(event);
+      };
+      document.addEventListener('mousedown', listener);
+      return () => {
+        document.removeEventListener('mousedown', listener);
+      };
+    }, [ref, handler]);
+  };
 
-  return (
-    <div>
-      <DistrictImage src={imagePath} alt={imageName} onClick={() => {
-        handleMenuOpen()
+    useOnClickOutside(menuRef, () => {
+      if (openMenu)
+        setOpenMenu(false)
       }
-      }/>
-      <img className={'actionIcons'} src={layIcon} onClick={() => {
-        addLayDistricts(districtName)
-      }}/>
-      <img className={'actionIcons'} src={buildIcon} onClick={() => {
-        addBuiltDistricts(districtName)
-      }
-      }/>
-    </div>
-  );
+    )
+
+
+    return (
+      <>
+        <div>
+          <DistrictImage src={imagePath} alt={imageName} onClick={() => {
+            setOpenMenu(!openMenu)
+          }
+          }/>
+
+          <AddNewDistrict open={openMenu} ref={menuRef}>
+            <img className={'actionIcons'} src={layIcon} onClick={() => {
+              addLayDistricts(districtName)
+            }}/>
+            <img className={'actionIcons'} src={buildIcon} onClick={() => {
+              addBuiltDistricts(districtName)
+            }
+            }/>
+          </AddNewDistrict>
+        </div>
+
+      </>
+    );
 };
 
 export default NewDistrict;
