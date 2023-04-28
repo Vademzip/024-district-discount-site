@@ -129,7 +129,7 @@ const NewDistrict = ({districtName}) => {
 
 
   function dropDistrictImage(event) {
-    console.log('произошел drop')
+    console.log(event.target.className)
   }
 
   return (
@@ -144,6 +144,7 @@ const NewDistrict = ({districtName}) => {
                      onDragStart={(event) => addDraggableDistrict(event, district)}
         // onDragEnd={}
                      onDragEnd={(event) => dropDistrictImage(event)}
+
       />
       {/*<img className={'actionIcons'} src={layIcon} onClick={() => {
         addLayDistricts(districtName)

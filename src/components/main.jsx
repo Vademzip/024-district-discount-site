@@ -180,6 +180,16 @@ const Main = () => {
    }*/
 
 
+  function dragLeaveHandler(event) {
+    if (event.target.className === 'layDistrict') {
+      dispatch(setDropCategory('lay'))
+    } else if (event.target.className === 'builtDistrict') {
+      console.log(event.target.className)
+      dispatch(setDropCategory('built'))
+    }
+
+  }
+
   return (
     <>
       <ToastContainer
@@ -217,13 +227,13 @@ const Main = () => {
           </ResearchedDistricts>
         </div>
         <MyDistrictsList
-          onDragLeave={() => dispatch(setDropCategory('lay'))}
+          className={'layDistrict'}
         >
           <div>Заложенные районы</div>
           {layDistricts}
         </MyDistrictsList>
         <MyDistrictsList
-          onDragLeave={() => dispatch(setDropCategory('built'))}
+          className={'builtDistrict'}
         >
           <div>Построенные районы</div>
           {builtDistricts}
