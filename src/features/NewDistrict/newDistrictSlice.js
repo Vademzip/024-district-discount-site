@@ -52,6 +52,14 @@ const NewDistrictSlice = createSlice({
             state.layDistrict.districts[action.payload]++;
             state.layDistrict.count++
         },
+        deleteBuiltDistrict : (state, action) => {
+            state.builtDistrict.districts[action.payload]--;
+            state.builtDistrict.count--
+        },
+        deleteLayDistrict : (state, action) => {
+            state.layDistrict.districts[action.payload]--;
+            state.layDistrict.count--
+        },
         toggleMenu : state => {
             state.newDistrictMenuOpen = !state.newDistrictMenuOpen
         },
@@ -62,9 +70,9 @@ const NewDistrictSlice = createSlice({
 export const NewDistrictReducer = NewDistrictSlice.reducer
 
 export const {addBuiltDistrict, addLayDistrict, toggleMenu, resetDistricts} = NewDistrictSlice.actions
-
 export const selectAllDistricts = (state) => state.NewDistrict
 export const selectNewDistrictMenuState = (state) => state.NewDistrict.newDistrictMenuOpen
-
 export const selectGovernmentPlazaCount = (state) => state.NewDistrict.builtDistrict.districts.GovernmentPlaza + state.NewDistrict.layDistrict.districts.GovernmentPlaza
 export const selectDiplomaticQuarterCount = (state) => state.NewDistrict.builtDistrict.districts.DiplomaticQuarter + state.NewDistrict.layDistrict.districts.DiplomaticQuarter
+export const selectLayDistrictCount = (state, districtName) => state.NewDistrict.layDistrict.districts[districtName]
+export const selectBuiltDistrictCount = (state, districtName) => state.NewDistrict.builtDistrict.districts[districtName]

@@ -43,16 +43,27 @@ const MyDistrictSlice = createSlice({
             state.builtDistrict.count++
         },
         addLayDistrict : (state, action) => {
+
             const districtName = `lay${action.payload}Count`
             state.layDistrict.districts[districtName]++;
             state.layDistrict.count++
+        },
+        deleteBuiltDistrict : (state, action) => {
+            const districtName = `built${action.payload}Count`
+            state.builtDistrict.districts[districtName]--;
+            state.builtDistrict.count--
+        },
+        deleteLayDistrict : (state, action) => {
+            const districtName = `lay${action.payload}Count`
+            state.layDistrict.districts[districtName]--;
+            state.layDistrict.count--
         }
     }
 })
 
 export const NewDistrictReducer = MyDistrictSlice.reducer
 
-export const {addBuiltDistrict, addLayDistrict} = MyDistrictSlice.actions
+export const {addBuiltDistrict, addLayDistrict,deleteBuiltDistrict,deleteLayDistrict} = MyDistrictSlice.actions
 // export const selectBuiltDistrictCount = (state) => state.researchedDistricts.builtDistrict.count
 // export const selectLayDistrictCount = (state) => state.researchedDistricts.layDistrict.count
 // export const selectResearchedDistricts = (state) => state.researchedDistricts.districts

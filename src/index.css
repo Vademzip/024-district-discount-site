@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,500&display=swap');
 
+@media (max-width:600px){
+    .myDistrict{
+        flex-direction: column;
+        row-gap: 20px;
+    }
+}
+
 *{
     font-family: 'Montserrat', sans-serif;
 }
@@ -26,4 +33,37 @@
     column-gap: 30px;
     display: flex;
     justify-content: space-between;
+
+}
+
+.activeCategory{
+    background-color: grey;
+}
+
+
+.trashBinIcon{
+    border-radius: 100px;
+    outline: 1px solid white;
+    padding: 15px;
+    right: 15%;
+    position: absolute;
+    min-width: 74px;
+    min-height: 70px;
+}
+
+.trashBinIcon[data-theme="light"]{
+    outline-color: black;
+}
+
+.trashBinIconClose{
+    margin-left: 10px;
+}
+
+.trashBinIconOpen{
+    margin-left: 5px;
+}
+
+
+.trashBinIconClose[data-theme="light"]{
+    margin-left: 5px;
 }

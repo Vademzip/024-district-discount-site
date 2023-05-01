@@ -1,0 +1,15 @@
+export const DistrictTypes = {
+    HolySite: 'HolySite',
+    Campus: 'Campus',
+    Preserve: 'Preserve',
+    GovernmentPlaza: 'GovernmentPlaza',
+    EntertainmentComplex: 'EntertainmentComplex',
+    TheaterSquare: 'TheaterSquare',
+    WaterPark: 'WaterPark',
+    Encampment: 'Encampment',
+    CommercialHub: 'CommercialHub',
+    Harbor: 'Harbor',
+    DiplomaticQuarter: 'DiplomaticQuarter',
+    IndustrialZone: 'IndustrialZone',
+    Aerodrome: 'Aerodrome',
+}
