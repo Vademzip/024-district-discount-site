@@ -9,7 +9,8 @@ import {
     addLayDistrict,
     resetDistricts,
     selectAllDistricts, selectBuiltDistrictCount, selectDiplomaticQuarterCount,
-    selectGovernmentPlazaCount, selectLayDistrictCount
+    selectGovernmentPlazaCount, selectLayDistrictCount, selectShowTrashBin,
+    deleteLayDistrict, deleteBuiltDistrict
 } from "../features/NewDistrict/newDistrictSlice.js";
 import MyLayDistrict from "../features/MyDistrict/MyLayDistrict.jsx";
 import {
@@ -21,7 +22,6 @@ import {toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import {useDrop} from "react-dnd";
 import MyBuiltDistrict from "../features/MyDistrict/MyBuiltDistrict.jsx";
-import {deleteBuiltDistrict, deleteLayDistrict} from "../features/MyDistrict/MyDistrictSlice.js";
 import TrashBinOpenWhite from "/public/TrashBinOpenWhite.png"
 import TrashBinOpenBlack from "/public/TrashBinOpenBlack.png"
 import TrashBinCloseWhite from "/public/TrashBinCloseWhite.png"
@@ -225,8 +225,7 @@ const Main = ({theme}) => {
     const layDistrictsCount = AllDistricts.layDistrict.count
     const governmentPlazaCount = AllDistricts.builtDistrict.districts.GovernmentPlaza + AllDistricts.layDistrict.districts.GovernmentPlaza
     const diplomaticQuarterCount = AllDistricts.builtDistrict.districts.DiplomaticQuarter + AllDistricts.layDistrict.districts.DiplomaticQuarter
-    const [showTrashBin, setShowTrashBin] = useState(false)
-
+    const showTrashBin = useSelector(selectShowTrashBin)
 
     const moveLayDistrictToBuiltDistrict = (district, dispatch) => {
         if (districtCount(true, district)) {
@@ -350,12 +349,12 @@ const Main = ({theme}) => {
     const builtDistricts = Object.entries(AllDistricts.builtDistrict.districts).map(([districtName, districtCount]) => (
 
         <div key={districtName}>
-            <MyBuiltDistrict showTrashBin={setShowTrashBin} districtName={districtName} districtCount={districtCount}/>
+            <MyBuiltDistrict districtName={districtName} districtCount={districtCount}/>
         </div>
     ));
     const layDistricts = Object.entries(AllDistricts.layDistrict.districts).map(([districtName, districtCount]) => (
         <div key={districtName}>
-            <MyLayDistrict showTrashBin={setShowTrashBin} districtName={districtName} districtCount={districtCount}/>
+            <MyLayDistrict districtName={districtName} districtCount={districtCount}/>
         </div>
     ));
 
