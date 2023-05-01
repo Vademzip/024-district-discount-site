@@ -265,7 +265,7 @@ const Main = ({theme}) => {
         if (districtCount(false, district)) {
             dispatch(deleteBuiltDistrict(district))
         } else {
-            toast.error('🦄 Вы ещё не заложили этот район...', {
+            toast.error('🦄 Вы ещё не построили этот район...', {
                 position: "top-right",
                 autoClose: 3000,
                 hideProgressBar: false,
