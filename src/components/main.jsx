@@ -22,6 +22,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import {useDrop} from "react-dnd";
 import MyBuiltDistrict from "../features/MyDistrict/MyBuiltDistrict.jsx";
 import {deleteBuiltDistrict, deleteLayDistrict} from "../features/MyDistrict/MyDistrictSlice.js";
+import TrashBinOpenWhite from "/public/TrashBinOpenWhite.png"
+import TrashBinOpenBlack from "/public/TrashBinOpenBlack.png"
+import TrashBinCloseWhite from "/public/TrashBinCloseWhite.png"
+import TrashBinCloseBlack from "/public/TrashBinCloseBlack.png"
+
 
 const GridContainer = styled.div`
   display: flex;
@@ -345,12 +350,12 @@ const Main = ({theme}) => {
     const builtDistricts = Object.entries(AllDistricts.builtDistrict.districts).map(([districtName, districtCount]) => (
 
         <div key={districtName}>
-            <MyBuiltDistrict showTrashBin = {setShowTrashBin} districtName={districtName} districtCount={districtCount}/>
+            <MyBuiltDistrict showTrashBin={setShowTrashBin} districtName={districtName} districtCount={districtCount}/>
         </div>
     ));
     const layDistricts = Object.entries(AllDistricts.layDistrict.districts).map(([districtName, districtCount]) => (
         <div key={districtName}>
-            <MyLayDistrict showTrashBin = {setShowTrashBin} districtName={districtName} districtCount={districtCount}/>
+            <MyLayDistrict showTrashBin={setShowTrashBin} districtName={districtName} districtCount={districtCount}/>
         </div>
     ));
 
@@ -481,8 +486,10 @@ const Main = ({theme}) => {
             }>Сбросить всё</StyledButton>
             {showTrashBin &&
                 <div data-theme={theme} className={'trashBinIcon'} ref={trashBinRef}>
-                    {isOverTrashBin ? <img className={'trashBinIconOpen'} src={theme === 'dark' ? '/public/trashBinOpenWhite.png' : '/public/trashBinOpenBlack.png'}/> :
-                        <img className={'trashBinIconClose'} data-theme={theme} src={theme === 'dark' ? '/public/trashBinCloseWhite.png' : '/public/trashBinCloseBlack.png'}/>}
+                    {isOverTrashBin ? <img className={'trashBinIconOpen'}
+                                           src={theme === 'dark' ? TrashBinOpenWhite : TrashBinOpenBlack}/> :
+                        <img className={'trashBinIconClose'} data-theme={theme}
+                             src={theme === 'dark' ? TrashBinCloseWhite : TrashBinCloseBlack}/>}
                 </div>
             }
         </>
