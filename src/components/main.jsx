@@ -64,16 +64,20 @@ const DistrictImage = styled.img`
 `
 
 const ResearchedDistricts = styled.div`
-  height: 300px;
+  width: 250px;  
+  height: 100%;
   text-align: center;
   font-size: 24px;
-  width: 324px;
   padding: 10px;
   border: 1px solid black;
   border-radius: 10px;
   @media (max-width: 900px) {
-    width: auto;
+    width: 100%;
     height: auto;
+  }
+
+  & > div:first-child {
+    width: 100%;
   }
 `
 
@@ -100,20 +104,23 @@ const SetDistrictsBlock = styled.div`
 `
 
 const MyDistrictsList = styled.div`
-  height: 300px;
-  text-align: center;
-  font-size: 24px;
-  width: 324px;
-  padding: 10px;
-  border: 1px solid black;
-  border-radius: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  @media (max-width: 900px) {
-    width: auto;
-    height: auto;
-  }
+    text-align: center;
+    font-size: 24px;
+    width: 324px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    @media (max-width: 900px) {
+        width: auto;
+        height: auto;
+    }
+
+    & > div:first-child {
+        width: 100%;
+
 `
 
 const StyledButton = styled.button`
@@ -428,13 +435,16 @@ const Main = ({theme}) => {
                         {builtDistricts}
                     </MyDistrictsList>
                 </div>
-                <MyDistrictsList>
+                <ResearchedDistricts>
                     <div>Скидочные райончики</div>
-                    {discountDistrictArray.map((item, index) => <div>
-                            <MyLayDistrict key={index} districtName={item}/>
-                        </div>
-                    )}
-                </MyDistrictsList>
+                    {discountDistrictArray.length
+                      ? (discountDistrictArray.map((item, index) => <div>
+                          <MyLayDistrict key={index} districtName={item}/>
+                      </div>)
+                    )
+                      : (<h6><br/><br/>Сейчас здесь пусто. <br/> Достройте парочку районов!</h6>)
+                    }
+                </ResearchedDistricts>
                 <div>
                     <SetDistrict>
                         <div style={{alignSelf: 'center', height: '100%'}}>Добавить новый район</div>
@@ -483,14 +493,12 @@ const Main = ({theme}) => {
                 });
             }
             }>Сбросить всё</StyledButton>
-            {showTrashBin &&
                 <div data-theme={theme} className={'trashBinIcon'} ref={trashBinRef}>
                     {isOverTrashBin ? <img className={'trashBinIconOpen'}
                                            src={theme === 'dark' ? TrashBinOpenWhite : TrashBinOpenBlack}/> :
                         <img className={'trashBinIconClose'} data-theme={theme}
                              src={theme === 'dark' ? TrashBinCloseWhite : TrashBinCloseBlack}/>}
                 </div>
-            }
         </>
 
     );
