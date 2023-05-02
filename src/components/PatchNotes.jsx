@@ -51,7 +51,7 @@ export default function PatchNotes() {
 
   return (
     <div className={'container'}>
-      <div>
+      <div className={'accordionContainer'}>
       <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
           <Typography>Обновление от 02.05.2023</Typography>

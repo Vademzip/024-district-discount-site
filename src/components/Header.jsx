@@ -8,7 +8,8 @@ const HeaderContent = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  &>a{
+
+  & > a {
     text-decoration: none;
     color: black;
   }
@@ -23,6 +24,7 @@ const LogoBlock = styled.div`
 
 const Title = styled.div`
   font-size: 28px;
+  color: ${props => props.theme === 'dark' ? 'white' : 'black'}
 `
 
 const LogoImg = styled.img`
@@ -38,7 +40,8 @@ const NavBar = styled.div`
 
   & a {
     text-decoration: none;
-    color: black;
+    color: ${props => props.theme === 'dark' ? 'white' : 'black'}
+
   }
 
   & .active {
@@ -46,26 +49,26 @@ const NavBar = styled.div`
   }
 `
 
-const Header = () => {
-  return (
-    <header>
-      <div className={'container'}>
-        <HeaderContent>
-          <NavLink to={'/'}>
-            <LogoBlock>
-              <Title>Civ Discount</Title>
-              <LogoImg src={Logo}/>
-            </LogoBlock>
-          </NavLink>
-          <NavBar>
-            <NavLink to={'/'}>Главная</NavLink>
-            <NavLink to={'/faq'}>Инструкция</NavLink>
-            <NavLink to={'/patch-notes'}>История обновлений</NavLink>
-          </NavBar>
-        </HeaderContent>
-      </div>
-    </header>
-  );
+const Header = ({theme}) => {
+    return (
+        <header data-theme={theme}>
+            <div className={'container'}>
+                <HeaderContent>
+                    <NavLink to={'/'}>
+                        <LogoBlock>
+                            <Title theme={theme}>Civ Discount</Title>
+                            <LogoImg src={Logo}/>
+                        </LogoBlock>
+                    </NavLink>
+                    <NavBar theme={theme}>
+                        <NavLink to={'/'}>Главная</NavLink>
+                        <NavLink to={'/faq'}>Инструкция</NavLink>
+                        <NavLink to={'/patch-notes'}>История обновлений</NavLink>
+                    </NavBar>
+                </HeaderContent>
+            </div>
+        </header>
+    );
 };
 
 export default Header;

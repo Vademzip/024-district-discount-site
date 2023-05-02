@@ -39,7 +39,7 @@ function App() {
           <DndProvider backend={HTML5Backend}>
               <div className="App">
                   <GlobalStyle theme={theme}/>
-                  <Header/>
+                  <Header theme={theme}/>
                   <Routes>
                       <Route path={'/'} element={<Main theme={theme}/>}/>
                       <Route path={'/faq'} element={<Faq/>}/>
