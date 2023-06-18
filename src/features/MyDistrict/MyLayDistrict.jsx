@@ -43,9 +43,7 @@ const DistrictImage = styled.img`
 `
 
 
-
-
-const MyLayDistrict = ({districtName, districtCount}) => {
+const MyLayDistrict = ({districtName, districtCount, discountPanel}) => {
     const {t, i18n} = useTranslation();
     const showTrashBin = useSelector(selectShowTrashBin)
     const [openLayMenu, setOpenLayMenu] = useState(false)
@@ -116,13 +114,13 @@ const MyLayDistrict = ({districtName, districtCount}) => {
     return (
         <>
             <div style={{position: 'relative'}} ref={districtImageRef}>
-                <DistrictImage ref={dragRef} src={imagePath} alt={districtName} onClick={() => {
+                <DistrictImage ref={discountPanel ? null : dragRef} src={imagePath} alt={districtName} onClick={() => {
                     setOpenLayMenu(!openLayMenu)
                 }}/>
                 <DistrictCountIcon>{districtCount}</DistrictCountIcon>
             </div>
 
-            <AddNewDistrict open={openLayMenu} ref={layMenuRef}>
+            {!discountPanel && <AddNewDistrict open={openLayMenu} ref={layMenuRef}>
                 <img className={'actionIcons'} src={deleteIcon} onClick={() => {
                     moveLayDistrictToTrashBin()
                 }} alt={'layDistrict'}/>
@@ -130,7 +128,7 @@ const MyLayDistrict = ({districtName, districtCount}) => {
                     moveLayDistrictToBuiltDistrict()
                 }
                 } alt={'builtDistrict'}/>
-            </AddNewDistrict>
+            </AddNewDistrict>}
         </>
     );
 };

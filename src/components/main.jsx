@@ -446,7 +446,7 @@ const Main = ({theme}) => {
                 <ResearchedDistricts>
                     <div>{t('table_names.Discount districts')}</div>
                     {Object.keys(discountDistrictArray).length
-                        ? Object.entries(discountDistrictArray).map(([districtName,districtCount]) => <MyLayDistrict key={`discountDistrict_${districtName}`} districtName={districtName} districtCount={districtCount}/>)
+                        ? Object.entries(discountDistrictArray).map(([districtName,districtCount]) => <MyLayDistrict key={`discountDistrict_${districtName}`} districtName={districtName} districtCount={districtCount} discountPanel/>)
                         : (<h6><br/><br/>{t('empty_discount_text')}</h6>)
                     }
                 </ResearchedDistricts>

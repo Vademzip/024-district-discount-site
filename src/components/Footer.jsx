@@ -19,7 +19,7 @@ const Footer = ({theme}) => {
         }}>
             <Typography>{t('footer_text.made_by')} <a href={'https://github.com/Vademzip/'} target={"_blank"}>Vadem Zip</a></Typography>
             <Typography>{t('footer_text.other_project')}: <a href={'https://reddrafter.vercel.app'} target={"_blank"}>Red Death Drafter</a></Typography>
-            <Typography>{t('footer_text.version')}: 3.0.1</Typography>
+            <Typography>{t('footer_text.version')}: 3.0.2</Typography>
         </Box>
     );
 };
