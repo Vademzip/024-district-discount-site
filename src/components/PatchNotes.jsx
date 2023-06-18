@@ -41,7 +41,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({theme}) => ({
 }));
 
 export default function PatchNotes({theme}) {
-    const [expanded, setExpanded] = React.useState('panel1');
+    const [expanded, setExpanded] = React.useState('panel2');
     const {t, i18n} = useTranslation();
 
     const handleChange = (panel) => (event, newExpanded) => {

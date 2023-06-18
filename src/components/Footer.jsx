@@ -2,7 +2,7 @@ import React from 'react';
 import {Box, Typography} from "@mui/material";
 import {useTranslation} from "react-i18next";
 
-const Footer = () => {
+const Footer = ({theme}) => {
     const {t, i18n} = useTranslation();
 
     return (
@@ -13,13 +13,13 @@ const Footer = () => {
             alignItems: 'center',
             rowGap: '10px',
             "& a":{
-                color: 'black',
+                color: `${theme === 'dark' ? 'white' : 'black'}`,
                 textDecoration : 'none'
             }
         }}>
             <Typography>{t('footer_text.made_by')} <a href={'https://github.com/Vademzip/'} target={"_blank"}>Vadem Zip</a></Typography>
             <Typography>{t('footer_text.other_project')}: <a href={'https://reddrafter.vercel.app'} target={"_blank"}>Red Death Drafter</a></Typography>
-            <Typography>{t('footer_text.version')}: 3.0.0</Typography>
+            <Typography>{t('footer_text.version')}: 3.0.1</Typography>
         </Box>
     );
 };

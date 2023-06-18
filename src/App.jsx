@@ -50,7 +50,7 @@ function App() {
                             <Route path={'/patch-notes'} element={<PatchNotes theme={theme}/>}/>
                         </Routes>
                     </main>
-                    <Footer/>
+                    <Footer theme={theme}/>
                 </div>
             </DndProvider>
         </Router>
