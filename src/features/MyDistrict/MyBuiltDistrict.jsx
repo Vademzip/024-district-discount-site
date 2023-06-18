@@ -14,6 +14,8 @@ import {AddNewDistrict, useOnClickOutside} from "../NewDistrict/NewDistrict.jsx"
 import deleteIcon from "../../../public/DeleteIcon.png";
 import layIcon from "/public/brickwall.png"
 import {toast} from "react-toastify";
+import {useTranslation} from "react-i18next";
+import {DistrictCountIcon} from "./MyLayDistrict.jsx";
 
 const DistrictImage = styled.img`
   max-width: 64px;
@@ -25,6 +27,7 @@ const DistrictImage = styled.img`
 
 
 const MyBuiltDistrict = ({districtName, districtCount}) => {
+  const {t, i18n} = useTranslation();
   const showTrashBin = useSelector(selectShowTrashBin)
   const [openBuiltMenu, setOpenBuiltMenu] = useState(false)
   const districtImageRef = useRef(null)
@@ -61,7 +64,7 @@ const MyBuiltDistrict = ({districtName, districtCount}) => {
     if (districtCount) {
       dispatch(deleteBuiltDistrict(districtName))
     } else {
-      toast.error('🦄 Вы ещё не построили этот район...', {
+      toast.error(`${t('toast_notification.not_finished_district')}`, {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -78,7 +81,7 @@ const MyBuiltDistrict = ({districtName, districtCount}) => {
       dispatch(addLayDistrict(districtName))
       dispatch(deleteBuiltDistrict(districtName))
     } else {
-      toast.error('🦄 Вы ещё не построили этот район...', {
+      toast.error(`${t('toast_notification.not_finished_district')}`, {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -92,13 +95,13 @@ const MyBuiltDistrict = ({districtName, districtCount}) => {
 
   return (
     <>
-      <div ref={districtImageRef}>
+      <div style={{position: 'relative'}} ref={districtImageRef}>
         <DistrictImage ref={dragRef} src={imagePath} alt={districtName} onClick={() => {
           setOpenBuiltMenu(!openBuiltMenu)
         }
         }/>
+        <DistrictCountIcon>{districtCount}</DistrictCountIcon>
       </div>
-      <span>{districtCount}</span>
       <AddNewDistrict open={openBuiltMenu} ref={builtMenuRef}>
         <img className={'actionIcons'} src={deleteIcon} onClick={() => {
           moveBuiltDistrictToTrashBin()

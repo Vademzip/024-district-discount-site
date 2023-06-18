@@ -5,6 +5,7 @@ import './index.css'
 import {Provider} from "react-redux";
 import {store} from "./store.js";
 import { inject } from '@vercel/analytics';
+import './i18n';
 
 inject();
 

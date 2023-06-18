@@ -1,0 +1,61 @@
+{
+  "table_names": {
+    "Researched districts": "Researched districts",
+    "Unfinished districts": "Unfinished districts",
+    "Built districts": "Built districts",
+    "Discount districts": "Discount districts",
+    "Add new district": "Add new district"
+  },
+  "header": {
+    "Home": "Home",
+    "Guide": "Guide",
+    "Patch notes": "Patch notes"
+  },
+  "Reset all": "Reset all",
+  "empty_discount_text": "It's empty now.\nComplete a couple of districts!",
+  "toast_notification": {
+    "not_layed_district": "\uD83E\uDD84 You haven't laid this district yet...",
+    "already_built_government_plaza": "\uD83E\uDD84 You have already laid or built a government plaza..",
+    "already_built_diplomatic_quartal" : "\uD83E\uDD84 You have already laid or built a diplomatic quarter..",
+    "not_researched_district" : "\uD83E\uDD84 You haven't researched this district yet..",
+    "not_finished_district" : "\uD83E\uDD84 You haven't built this district yet...",
+    "reset_all_done" : "\uD83E\uDD84 Data has been successfully reset!"
+  },
+  "guide": {
+    "step1": "1) First of all, you need to choose the districts you have researched. This is done by simply clicking on the district icon in the 'Researched districts' panel",
+    "step2": "2) Next, in the 'Add new district' panel, mark the district as laid or completed. There are two ways to do this:",
+    "step3": "3) Done! In the 'Discount Districts' panel you will see which districts you can build with a discount at the moment",
+    "actions_button" : "Using the quick action buttons",
+    "dnd" : "Using drag and drop",
+    "moveDistrict": "How to move the district from the laid to the built and vice versa?",
+    "deleteDistrict": "How to remove the district from laid or built?"
+  },
+  "patchnotes" : {
+    "update_1": {
+      "title" : "Update from 02.05.2023",
+      "content" : {
+        "li_1" : "Added a header in the desktop version of the site and a logo",
+        "li_2" : "Added the ability to move districts to the trash or to the laid/completed ones by clicking, not dragging",
+        "li_3" : "The trash can icon is always visible in the desktop version of the site",
+        "li_4" : "A small bug fix"
+      }
+    },
+    "update_2": {
+      "title" : "Update from 18.06.2023",
+      "content" : {
+        "li_1" : "New display of the number of districts",
+        "li_2" : "Now you can see the number of districts of the same type that you can build with a discount",
+        "li_3" : "The section with the guide is filled in",
+        "li_4" : "Added English localization",
+        "li_5" : "Appearance corrections"
+      }
+    }
+  },
+  "footer_text": {
+    "other_project" : "See other projects",
+    "made_by": "Made by",
+    "version": "Version"
+  }
+}
+
+

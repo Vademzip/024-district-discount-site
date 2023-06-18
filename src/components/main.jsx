@@ -26,6 +26,7 @@ import TrashBinOpenWhite from "/public/TrashBinOpenWhite.png"
 import TrashBinOpenBlack from "/public/TrashBinOpenBlack.png"
 import TrashBinCloseWhite from "/public/TrashBinCloseWhite.png"
 import TrashBinCloseBlack from "/public/TrashBinCloseBlack.png"
+import {useTranslation} from "react-i18next";
 
 
 const GridContainer = styled.div`
@@ -64,13 +65,19 @@ const DistrictImage = styled.img`
 `
 
 const ResearchedDistricts = styled.div`
-  width: 250px;  
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 250px;
   height: 100%;
   text-align: center;
   font-size: 24px;
   padding: 10px;
   border: 1px solid black;
   border-radius: 10px;
+  & img {
+    height: 64px;
+  }
   @media (max-width: 900px) {
     width: 100%;
     height: auto;
@@ -104,22 +111,22 @@ const SetDistrictsBlock = styled.div`
 `
 
 const MyDistrictsList = styled.div`
-    text-align: center;
-    font-size: 24px;
-    width: 324px;
-    padding: 10px;
-    border: 1px solid black;
-    border-radius: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    @media (max-width: 900px) {
-        width: auto;
-        height: auto;
-    }
+  text-align: center;
+  font-size: 24px;
+  width: 324px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  @media (max-width: 900px) {
+    width: auto;
+    height: auto;
+  }
 
-    & > div:first-child {
-        width: 100%;
+  & > div:first-child {
+    width: 100%;
 
 `
 
@@ -135,11 +142,11 @@ const StyledButton = styled.button`
   background: orange;
   cursor: pointer;
 `
-export const addBuiltDistrictsFunc = (district, govPlazaCount, dipQuarterCount, ResearchedDistrictsState, dispatch) => {
+export const addBuiltDistrictsFunc = (district, govPlazaCount, dipQuarterCount, ResearchedDistrictsState, dispatch, t) => {
     const isResearched = `is${district}Researched`
     if (district === 'GovernmentPlaza') {
         if (govPlazaCount > 0) {
-            toast.error('🦄 Вы уже заложили или построили правительственную площадь..', {
+            toast.error(t('toast_notification.already_built_government_plaza'), {
                 position: "top-right",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -153,7 +160,7 @@ export const addBuiltDistrictsFunc = (district, govPlazaCount, dipQuarterCount, 
     }
     if (district === 'DiplomaticQuarter') {
         if (dipQuarterCount > 0) {
-            toast.error('🦄 Вы уже заложили или построили дипломатический квартал..', {
+            toast.error(t('toast_notification.already_built_diplomatic_quartal'), {
                 position: "top-right",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -167,7 +174,7 @@ export const addBuiltDistrictsFunc = (district, govPlazaCount, dipQuarterCount, 
     }
     ResearchedDistrictsState[isResearched]
         ? dispatch(addBuiltDistrict(district))
-        : toast.error('🦄 Вы ещё не открыли данный район..', {
+        : toast.error(t('toast_notification.not_researched_district'), {
             position: "top-right",
             autoClose: 3000,
             hideProgressBar: false,
@@ -177,12 +184,12 @@ export const addBuiltDistrictsFunc = (district, govPlazaCount, dipQuarterCount, 
             theme: "light",
         });
 }
-export const addLayDistrictsFunc = (district, govPlazaCount, dipQuarterCount, ResearchedDistrictsState, dispatch) => {
+export const addLayDistrictsFunc = (district, govPlazaCount, dipQuarterCount, ResearchedDistrictsState, dispatch, t) => {
     const isResearched = `is${district}Researched`
 
     if (district === 'GovernmentPlaza') {
         if (govPlazaCount > 0) {
-            toast.error('🦄 Вы уже заложили или построили правительственную площадь..', {
+            toast.error(t('toast_notification.already_built_government_plaza'), {
                 position: "top-right",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -196,7 +203,7 @@ export const addLayDistrictsFunc = (district, govPlazaCount, dipQuarterCount, Re
     }
     if (district === 'DiplomaticQuarter') {
         if (dipQuarterCount > 0) {
-            toast.error('🦄 Вы уже заложили или построили дипломатический квартал..', {
+            toast.error(t('toast_notification.already_built_diplomatic_quartal'), {
                 position: "top-right",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -210,7 +217,7 @@ export const addLayDistrictsFunc = (district, govPlazaCount, dipQuarterCount, Re
     }
     ResearchedDistrictsState[isResearched]
         ? dispatch(addLayDistrict(district))
-        : toast.error('🦄 Вы ещё не открыли данный район..', {
+        : toast.error(t('toast_notification.not_researched_district'), {
             position: "top-right",
             autoClose: 3000,
             hideProgressBar: false,
@@ -225,7 +232,7 @@ export const addLayDistrictsFunc = (district, govPlazaCount, dipQuarterCount, Re
 const Main = ({theme}) => {
     const dispatch = useDispatch()
     const ResearchedDistrictsState = useSelector(selectResearchedDistricts)
-    const [discountDistrictArray, setDiscountDistrictArray] = useState([]);
+    const [discountDistrictArray, setDiscountDistrictArray] = useState({});
     const researchedDistrictsCount = useSelector(selectCountOfResearchedDistricts)
     const AllDistricts = useSelector(selectAllDistricts)
     const builtDistrictsCount = AllDistricts.builtDistrict.count
@@ -233,13 +240,13 @@ const Main = ({theme}) => {
     const governmentPlazaCount = AllDistricts.builtDistrict.districts.GovernmentPlaza + AllDistricts.layDistrict.districts.GovernmentPlaza
     const diplomaticQuarterCount = AllDistricts.builtDistrict.districts.DiplomaticQuarter + AllDistricts.layDistrict.districts.DiplomaticQuarter
     const showTrashBin = useSelector(selectShowTrashBin)
-
+    const {t, i18n} = useTranslation();
     const moveLayDistrictToBuiltDistrict = (district, dispatch) => {
         if (districtCount(true, district)) {
             dispatch(addBuiltDistrict(district))
             dispatch(deleteLayDistrict(district))
         } else {
-            toast.error('🦄 Вы ещё не заложили этот район...', {
+            toast.error(`${t('toast_notification.not_layed_district')}`, {
                 position: "top-right",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -255,7 +262,7 @@ const Main = ({theme}) => {
         if (districtCount(true, district)) {
             dispatch(deleteLayDistrict(district))
         } else {
-            toast.error('🦄 Вы ещё не заложили этот район...', {
+            toast.error(`${t('toast_notification.not_layed_district')}`, {
                 position: "top-right",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -271,7 +278,7 @@ const Main = ({theme}) => {
         if (districtCount(false, district)) {
             dispatch(deleteBuiltDistrict(district))
         } else {
-            toast.error('🦄 Вы ещё не построили этот район...', {
+            toast.error(`${t('toast_notification.not_finished_district')}`, {
                 position: "top-right",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -289,7 +296,7 @@ const Main = ({theme}) => {
             dispatch(addLayDistrict(district))
             dispatch(deleteBuiltDistrict(district))
         } else {
-            toast.error('🦄 Вы ещё не построили этот район...', {
+            toast.error(`${t('toast_notification.not_finished_district')}`, {
                 position: "top-right",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -312,7 +319,7 @@ const Main = ({theme}) => {
         accept: ['newDistrict', 'builtDistrictMove'],
         drop: ({districtName, type, districtCount}) => {
             if (type === 'newDistrict')
-                addLayDistrictsFunc(districtName, governmentPlazaCount, diplomaticQuarterCount, ResearchedDistrictsState, dispatch)
+                addLayDistrictsFunc(districtName, governmentPlazaCount, diplomaticQuarterCount, ResearchedDistrictsState, dispatch, t)
             if (type === "builtDistrictMove")
                 moveBuiltDistrictToLayDistrict(districtName, dispatch, districtCount)
         },
@@ -325,7 +332,7 @@ const Main = ({theme}) => {
         accept: ['newDistrict', 'layDistrictMove'],
         drop: ({districtName, type}) => {
             if (type === 'newDistrict')
-                addBuiltDistrictsFunc(districtName, governmentPlazaCount, diplomaticQuarterCount, ResearchedDistrictsState, dispatch)
+                addBuiltDistrictsFunc(districtName, governmentPlazaCount, diplomaticQuarterCount, ResearchedDistrictsState, dispatch, t)
             if (type === 'layDistrictMove')
                 moveLayDistrictToBuiltDistrict(districtName, dispatch)
         },
@@ -367,7 +374,7 @@ const Main = ({theme}) => {
 
 
     useEffect(() => {
-        const tempArray = [];
+        const tempArray = {};
         for (const key in AllDistricts.builtDistrict.districts) {
             const nameOfDistrict = `is${key}Researched`
             if (builtDistrictsCount >= researchedDistrictsCount)
@@ -375,14 +382,15 @@ const Main = ({theme}) => {
                     if (builtDistrictsCount / researchedDistrictsCount > (AllDistricts.builtDistrict.districts[key] + AllDistricts.layDistrict.districts[key])) {
                         if (key === 'GovernmentPlaza') {
                             if (governmentPlazaCount < 1) {
-                                tempArray.push(key)
+                                tempArray[key] = 1
                             }
                         } else if (key === 'DiplomaticQuarter') {
                             if (diplomaticQuarterCount < 1) {
-                                tempArray.push(key)
+                                tempArray[key] = 1
                             }
                         } else {
-                            tempArray.push(key)
+                            tempArray[key] = Math.ceil(builtDistrictsCount / researchedDistrictsCount - (AllDistricts.builtDistrict.districts[key] + AllDistricts.layDistrict.districts[key]))
+                            console.log(tempArray)
                         }
                     }
         }
@@ -407,7 +415,7 @@ const Main = ({theme}) => {
             <GridContainer>
                 <div>
                     <ResearchedDistricts>
-                        <div>Изученные районы</div>
+                        <div>{t('table_names.Researched districts')}</div>
                         <ResearchedDistrictsItem districtName={DistrictsName.HolySite}/>
                         <ResearchedDistrictsItem districtName={DistrictsName.Campus}/>
                         <ResearchedDistrictsItem districtName={DistrictsName.Preserve}/>
@@ -426,28 +434,25 @@ const Main = ({theme}) => {
                 <div className={'myDistrict'}>
                     <MyDistrictsList ref={layDistrictDropRef}
                                      className={`${isOverLayDistrict ? 'activeCategory' : ''}`}>
-                        <div>Заложенные районы</div>
+                        <div>{t('table_names.Unfinished districts')}</div>
                         {layDistricts}
                     </MyDistrictsList>
                     <MyDistrictsList ref={builtDistrictDropRef}
                                      className={`${isOverBuiltDistrict ? 'activeCategory' : ''}`}>
-                        <div>Построенные районы</div>
+                        <div>{t('table_names.Built districts')}</div>
                         {builtDistricts}
                     </MyDistrictsList>
                 </div>
                 <ResearchedDistricts>
-                    <div>Скидочные райончики</div>
-                    {discountDistrictArray.length
-                      ? (discountDistrictArray.map((item, index) => <div>
-                          <MyLayDistrict key={index} districtName={item}/>
-                      </div>)
-                    )
-                      : (<h6><br/><br/>Сейчас здесь пусто. <br/> Достройте парочку районов!</h6>)
+                    <div>{t('table_names.Discount districts')}</div>
+                    {Object.keys(discountDistrictArray).length
+                        ? Object.entries(discountDistrictArray).map(([districtName,districtCount]) => <MyLayDistrict key={`discountDistrict_${districtName}`} districtName={districtName} districtCount={districtCount}/>)
+                        : (<h6><br/><br/>{t('empty_discount_text')}</h6>)
                     }
                 </ResearchedDistricts>
                 <div>
                     <SetDistrict>
-                        <div style={{alignSelf: 'center', height: '100%'}}>Добавить новый район</div>
+                        <div style={{alignSelf: 'center', height: '100%'}}>{t('table_names.Add new district')}</div>
                         <SetDistrictsBlock>
                             <NewDistrict govPlazaCount={governmentPlazaCount} dipQuarterCount={diplomaticQuarterCount}
                                          districtName={DistrictsName.HolySite}/>
@@ -482,7 +487,7 @@ const Main = ({theme}) => {
             <StyledButton onClick={() => {
                 dispatch(resetResearchedState())
                 dispatch(resetDistricts())
-                toast('🦄 Данные успешно сброшены!', {
+                toast(`${t('toast_notification.reset_all_done')}`, {
                     position: "top-right",
                     autoClose: 3000,
                     hideProgressBar: false,
@@ -492,13 +497,13 @@ const Main = ({theme}) => {
                     theme: "light",
                 });
             }
-            }>Сбросить всё</StyledButton>
-                <div data-theme={theme} className={'trashBinIcon'} ref={trashBinRef}>
-                    {isOverTrashBin ? <img className={'trashBinIconOpen'}
-                                           src={theme === 'dark' ? TrashBinOpenWhite : TrashBinOpenBlack}/> :
-                        <img className={'trashBinIconClose'} data-theme={theme}
-                             src={theme === 'dark' ? TrashBinCloseWhite : TrashBinCloseBlack}/>}
-                </div>
+            }>{t('Reset all')}</StyledButton>
+            <div data-theme={theme} className={'trashBinIcon'} ref={trashBinRef}>
+                {isOverTrashBin ? <img className={'trashBinIconOpen'}
+                                       src={theme === 'dark' ? TrashBinOpenWhite : TrashBinOpenBlack}/> :
+                    <img className={'trashBinIconClose'} data-theme={theme}
+                         src={theme === 'dark' ? TrashBinCloseWhite : TrashBinCloseBlack}/>}
+            </div>
         </>
 
     );
