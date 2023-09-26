@@ -1,6 +1,6 @@
 import {Suspense, useEffect, useState} from 'react'
 import './App.css'
-import Main from "./components/main.jsx";
+import HomePage from "./components/HomePage.jsx";
 import {createGlobalStyle} from "styled-components";
 import {DndProvider} from "react-dnd";
 import {HTML5Backend} from "react-dnd-html5-backend";
@@ -45,7 +45,7 @@ function App() {
                         minHeight: 'calc(100vh - 75px - 93px)'
                     }}>
                         <Routes>
-                            <Route path={'/'} element={<Main theme={theme}/>}/>
+                            <Route path={'/'} element={<HomePage theme={theme}/>}/>
                             <Route path={'/faq'} element={<Faq theme={theme}/>}/>
                             <Route path={'/patch-notes'} element={<PatchNotes theme={theme}/>}/>
                         </Routes>

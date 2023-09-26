@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {selectResearchedDistricts} from "../ResearchedDistricts/researchedDistricts-slice.js";
-import {districtImages} from "../ResearchedDistricts/ResearchedDistricts.jsx";
+import {districtImages} from "../ResearchedDistricts/ResearchedDistrictsItem.jsx";
 import {useDrag} from "react-dnd";
 import {
   addLayDistrict,

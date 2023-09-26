@@ -2,11 +2,11 @@ import React, {useEffect, useRef, useState} from 'react';
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {selectResearchedDistricts} from "../ResearchedDistricts/researchedDistricts-slice.js";
-import {districtImages} from "../ResearchedDistricts/ResearchedDistricts.jsx";
+import {districtImages} from "../ResearchedDistricts/ResearchedDistrictsItem.jsx";
 import layIcon from "/public/brickwall.png"
 import buildIcon from "/public/checked.png"
 import {useDrag} from "react-dnd";
-import {addBuiltDistrictsFunc, addLayDistrictsFunc} from "../../components/main.jsx";
+import {addBuiltDistrictsFunc, addLayDistrictsFunc} from "../../components/HomePage.jsx";
 import {useTranslation} from "react-i18next";
 
 

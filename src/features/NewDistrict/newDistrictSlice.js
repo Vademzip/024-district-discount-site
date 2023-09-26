@@ -76,7 +76,6 @@ export const NewDistrictReducer = NewDistrictSlice.reducer
 export const {
     addBuiltDistrict,
     addLayDistrict,
-    toggleMenu,
     resetDistricts,
     deleteBuiltDistrict,
     deleteLayDistrict,
